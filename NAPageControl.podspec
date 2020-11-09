@@ -1,20 +1,20 @@
 Pod::Spec.new do |s|
-  s.name         = "SMPageControl"
-  s.version      = "1.2"
-  s.summary      = "UIPageControl’s fancy one-upping cousin."
+  s.name         = "NAPageControl"
+  s.version      = "1.3"
+  s.summary      = "UIPageControl’s fancy one-upping cousin. Inspired by https://github.com/Spaceman-Labs/SMPageControl"
   s.description  = <<-DESC
     Designers love to make beautifully custom page controls that fit in with all the wood,
     gradients, and inner shadows they've worked so hard perfecting.
 
-    Who can blame them?! SMPageControl makes it dead simple to give them what they want. Even
-    better, SMPageControl is a drop in replacement for UIPageControl. It mirrors all the functions
+    Who can blame them?! NAPageControl makes it dead simple to give them what they want. Even
+    better, NAPageControl is a drop in replacement for UIPageControl. It mirrors all the functions
     of UIPageControl, with literally no changes beyond the class name.
     DESC
-  s.homepage     = "https://github.com/Spaceman-Labs/SMPageControl"
+  s.homepage     = "https://github.com/noorulain17/NAPageControl"
   s.license      = {
     :type => 'MIT',
     :text => <<-LICENSE
-      Copyright (C) 2012 by Spaceman Labs
+      Copyright (C) 2012-2020 by Spaceman Labs, Noor ul Ain Ali
 
       Permission is hereby granted, free of charge, to any person obtaining a copy of this software
       and associated documentation files (the "Software"), to deal in the Software without
@@ -32,12 +32,14 @@ Pod::Spec.new do |s|
       OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     LICENSE
   }
-  s.author       = { "Jerry Jones" => "jerry@spacemanlabs.com" }
+  s.author       = { "Jerry Jones" => "jerry@spacemanlabs.com",
+                     "Noor ul Ain Ali" => "noorulain.ali89@gmail.com"
+                   }
   s.source       = {
-    :git => "https://github.com/Spaceman-Labs/SMPageControl.git",
-    :tag => "1.2"
+    :git => "https://github.com/noorulain17/NAPageControl.git",
+    :tag => "1.3"
   }
-  s.platform     = :ios, '5.0'
-  s.source_files = 'SMPageControl.{h,m}'
+  s.platform     = :ios, '8.0'
+  s.source_files = 'NAPageControl.swift'
   s.requires_arc = true
 end

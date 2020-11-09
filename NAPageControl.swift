@@ -1,6 +1,6 @@
 //
-//  SMPageControl.h
-//  SMPageControl
+//  NAPageControl.swift
+//  NAPageControl
 //
 //  Created by Jerry Jones on 10/13/12.
 //  Updated to Swift by Noor ul Ain Ali on 7/1/19.
@@ -10,35 +10,35 @@
 
 import UIKit
 
-@objc enum SMPageControlHorizontalAlignment: Int {
+@objc enum NAPageControlHorizontalAlignment: Int {
     case left = 0
     case center
     case right
 }
 
-@objc enum SMPageControlVerticalAlignment: Int {
+@objc enum NAPageControlVerticalAlignment: Int {
     case top = 1
     case middle
     case bottom
 }
 
-@objc enum SMPageControlTap: Int {
+@objc enum NAPageControlTap: Int {
     case tapBehaviorStep = 1
     case tapBehaviorJump
 }
 
-enum SMPageControlImageType: Int {
+enum NAPageControlImageType: Int {
     case typeNormal = 1
     case typeCurrent
     case typeMask
 }
 
-enum SMPageControlStyle: Int {
+enum NAPageControlStyle: Int {
     case defaultStyleClassic = 0
     case defaultStyleModern
 }
 
-@objc class SMPageControl : UIControl {
+@objc class NAPageControl : UIControl {
     
     @objc var numberOfPages: NSInteger = 0 {
         didSet {
@@ -92,8 +92,8 @@ enum SMPageControlStyle: Int {
             self.setNeedsLayout()
         }
     }
-    @objc var alignment: SMPageControlHorizontalAlignment = .center
-    @objc var verticalAlignment: SMPageControlVerticalAlignment = .middle
+    @objc var alignment: NAPageControlHorizontalAlignment = .center
+    @objc var verticalAlignment: NAPageControlVerticalAlignment = .middle
     @objc var pageIndicatorImage: UIImage? = nil {
         didSet {
             self.updateMeasuredIndicatorSizes()
@@ -118,7 +118,7 @@ enum SMPageControlStyle: Int {
     }
     @objc var currentPageIndicatorTintColor: UIColor? = nil
     @objc var hidesForSinglePage: Bool = false
-    @objc var tapBehavior: SMPageControlTap = .tapBehaviorStep
+    @objc var tapBehavior: NAPageControlTap = .tapBehaviorStep
     var pageNames = NSMutableDictionary()
     var pageImages : [Int: UIImage] = [:]
     var currentPageImages : [Int: UIImage] = [:]
@@ -159,17 +159,17 @@ enum SMPageControlStyle: Int {
     }
     
     @objc func setImage(_ image: UIImage, forPage pageIndex: NSInteger) {
-        self.setImage(image, forPage:pageIndex, type: SMPageControlImageType.typeNormal)
+        self.setImage(image, forPage:pageIndex, type: NAPageControlImageType.typeNormal)
         self.updateMeasuredIndicatorSizes()
     }
     
     @objc func setCurrentImage(_ image: UIImage?, forPage pageIndex: NSInteger) {
-        self.setImage(image, forPage:pageIndex, type: SMPageControlImageType.typeCurrent)
+        self.setImage(image, forPage:pageIndex, type: NAPageControlImageType.typeCurrent)
         self.updateMeasuredIndicatorSizes()
     }
     
     @objc func setImageMask(_ image: UIImage?, forPage pageIndex: NSInteger) {
-        self.setImage(image, forPage:pageIndex, type:SMPageControlImageType.typeMask)
+        self.setImage(image, forPage:pageIndex, type:NAPageControlImageType.typeMask)
         if image == nil {
             self.cgImageMasks[pageIndex] = nil
             return
@@ -182,15 +182,15 @@ enum SMPageControlStyle: Int {
     }
     
     @objc func imageForPage(_ pageIndex: NSInteger) -> UIImage? {
-        return self.imageForPage(pageIndex, type: SMPageControlImageType.typeNormal)
+        return self.imageForPage(pageIndex, type: NAPageControlImageType.typeNormal)
     }
     
     @objc func currentImageForPage(_ pageIndex: NSInteger) -> UIImage? {
-        return self.imageForPage(pageIndex, type: SMPageControlImageType.typeCurrent)
+        return self.imageForPage(pageIndex, type: NAPageControlImageType.typeCurrent)
     }
     
     @objc func imageMaskForPage(_ pageIndex: NSInteger) -> UIImage? {
-        return self.imageForPage(pageIndex, type: SMPageControlImageType.typeMask)
+        return self.imageForPage(pageIndex, type: NAPageControlImageType.typeMask)
     }
     
     @objc func updatePageNumberForScrollView(_ scrollView: UIScrollView) {
@@ -206,10 +206,10 @@ enum SMPageControlStyle: Int {
     
     // MARK: - UIAccessibility
     
-    // SMPageControl mirrors UIPageControl's standard accessibility functionality by default.
+    // NAPageControl mirrors UIPageControl's standard accessibility functionality by default.
     // Basically, the accessibility label is set to "[current page index + 1] of [page count]".
     
-    // SMPageControl extends UIPageControl's functionality by allowing you to name specific pages. This is especially useful when using
+    // NAPageControl extends UIPageControl's functionality by allowing you to name specific pages. This is especially useful when using
     // the per-page indicator images, and allows you to provide more context to the user.
     
     @objc func setName(_ name: String, forPage pageIndex: NSInteger) {
@@ -250,11 +250,11 @@ enum SMPageControlStyle: Int {
     // MARK: - Private
     
     private func initialize() {
-        tapBehavior = SMPageControlTap.tapBehaviorStep
+        tapBehavior = NAPageControlTap.tapBehaviorStep
         self.backgroundColor = UIColor.clear
-        self.setStyleWithDefaults(defaultStyle: SMPageControlStyle.defaultStyleClassic)
-        alignment = SMPageControlHorizontalAlignment.center
-        verticalAlignment = SMPageControlVerticalAlignment.middle
+        self.setStyleWithDefaults(defaultStyle: NAPageControlStyle.defaultStyleClassic)
+        alignment = NAPageControlHorizontalAlignment.center
+        verticalAlignment = NAPageControlVerticalAlignment.middle
         self.isAccessibilityElement = true
         self.accessibilityTraits = UIAccessibilityTraits.updatesFrequently
         self.accessibilityPageControl = UIPageControl()
@@ -364,24 +364,24 @@ enum SMPageControlStyle: Int {
         return top
     }
     
-    func setImage(_ image: UIImage!, forPage pageIndex: Int, type: SMPageControlImageType) {
+    func setImage(_ image: UIImage!, forPage pageIndex: Int, type: NAPageControlImageType) {
         if pageIndex < 0 || pageIndex >= numberOfPages {
             return
         }
         switch type {
-        case SMPageControlImageType.typeCurrent:
+        case .typeCurrent:
             if let dictImage = image {
                 self.currentPageImages[pageIndex] = dictImage
             } else {
                 self.currentPageImages[pageIndex] = nil
             }
-        case SMPageControlImageType.typeNormal:
+        case .typeNormal:
             if let dictImage = image {
                 self.pageImages[pageIndex] = dictImage
             } else {
                 self.pageImages[pageIndex] = nil
             }
-        case SMPageControlImageType.typeMask:
+        case .typeMask:
             if let dictImage = image {
                 self.pageImageMasks[pageIndex] = dictImage
             } else {
@@ -390,17 +390,17 @@ enum SMPageControlStyle: Int {
         }
     }
     
-    func imageForPage(_ pageIndex:Int, type:SMPageControlImageType) -> UIImage? {
+    func imageForPage(_ pageIndex:Int, type:NAPageControlImageType) -> UIImage? {
         if pageIndex < 0 || pageIndex >= numberOfPages {
             return nil
         }
         var dictionary: [Int: UIImage] = [:]
         switch (type) {
-        case SMPageControlImageType.typeCurrent:
+        case .typeCurrent:
             dictionary = currentPageImages
-        case SMPageControlImageType.typeNormal:
+        case .typeNormal:
             dictionary = pageImages
-        case SMPageControlImageType.typeMask:
+        case .typeMask:
             dictionary = pageImageMasks
         }
         return dictionary[pageIndex]
@@ -420,7 +420,7 @@ enum SMPageControlStyle: Int {
         return intrinsicContentSize
     }
     
-    func setStyleWithDefaults(defaultStyle:SMPageControlStyle) {
+    func setStyleWithDefaults(defaultStyle:NAPageControlStyle) {
         switch (defaultStyle) {
         case .defaultStyleModern:
             self.indicatorDiameter = DEFAULTINDICATORWIDTHLARGE
@@ -503,7 +503,7 @@ enum SMPageControlStyle: Int {
         if let touch: UITouch = touches.first {
             let point: CGPoint = touch.location(in: self)
             
-            if SMPageControlTap.tapBehaviorJump == self.tapBehavior {
+            if NAPageControlTap.tapBehaviorJump == self.tapBehavior {
                 
                 var tappedIndicatorIndex:Int = NSNotFound
                 self.pageRects.enumerateObjects { (value, index, stop) in
@@ -524,10 +524,10 @@ enum SMPageControlStyle: Int {
             let size: CGSize = self.sizeForNumberOfPages(self.numberOfPages)
             let left: CGFloat = self.leftOffset()
             let middle: CGFloat = left + (size.width / 2.0)
-            if point.x < middle {
+            if point.x < middle && self.currentPage > 0 {
                 self.currentPage = self.currentPage - 1
                 self.setCurrentPage(self.currentPage, sendEvent: true, canDefer: true)
-            } else {
+            } else if self.currentPage < (self.numberOfPages - 1) {
                 self.currentPage = self.currentPage + 1
                 self.setCurrentPage(self.currentPage, sendEvent: true, canDefer: true)
             }
