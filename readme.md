@@ -28,9 +28,11 @@ NAPageControl has a variety of simple (yet powerful) areas of customization, and
 * Extended Support for UIAccessibility
 * iOS 8 Ready
 
-![Screenshot](http://github.com/noorulain17/NAPageControl/NAPageControl-4.png) ![Screenshot](http://github.com/noorulain17/NAPageControl/NAPageControl-5.png)
+![Screenshot](https://raw.githubusercontent.com/noorulain17/NAPageControl/master/Example/Screenshots/NAPageControl-1.png)
 
 ## Example Usage
+
+#### Objective C
 
 ``` objective-c
 NAPageControl *pageControl = [[NAPageControl alloc] init];
@@ -39,16 +41,34 @@ pageControl.pageIndicatorImage = [UIImage imageNamed:@"pageDot"];
 pageControl.currentPageIndicatorImage = [UIImage imageNamed:@"currentPageDot"];
 [pageControl sizeToFit];
 [self.view addSubview:pageControl];
+```
 
+#### Swift
+
+``` swift
+let pageControl = NAPageControl()
+pageControl.numberOfPages = 10
+pageControl.pageIndicatorImage = UIImage(named: "pageDot")
+pageControl.currentPageIndicatorImage = UIImage(named: "currentPageDot")
+pageControl.sizeToFit()
+self.view.addSubview(pageControl)
 ```
 
 ## Direct Page Selection
 
 Because NAPageControl has such a high degree of flexibility, it's not uncommon for indicator images to be large enough to tap directly. The `tapBehavior` property allows the page control indicators to be individually tappable.
 
+#### Objective C
+
 ``` objective-c
 NAPageControl *pageControl = [[NAPageControl alloc] init];
 pageControl.tapBehavior = NAPageControlTapBehaviorJump;
+```
+
+#### Swift
+``` swift
+let pageControl = NAPageControl()
+pageControl.tapBehavior = .tapBehaviorJump
 ```
 
 ## UIAccessibility Additions
@@ -56,6 +76,8 @@ pageControl.tapBehavior = NAPageControlTapBehaviorJump;
 UIPageControl (like all Apple controls) provides out of the box support for UIAccessibility. The default behavior is to set the accessibility value to "page [current page + 1] of [number of pages]". e.g. "page 1 of 10"
 
 NAPageControl provides the exact same functionality, but also allows you to name individual pages. This is extremely useful when using per page indicator images, where one or more page is likely to have a specific usage that is identifiable to the user.
+
+#### Objective C
 
 ``` objective-c
 NAPageControl *pageControl = [[NAPageControl alloc] init];
@@ -68,7 +90,17 @@ NAPageControl *pageControl = [[NAPageControl alloc] init];
 
 ```
 
-![Screenshot](http://github.com/noorulain17/NAPageControl/NAPageControl-3.png)
+#### Swift
+
+``` swift
+let pageControl = NAPageControl()
+pageControl.setImage(UIImage(named: "searchDot")!, forPage: 0)
+pageControl.setCurrentImage(UIImage(named: "currentSearchDot")!, forPage: 0)
+pageControl.setImage(UIImage(named: "appleDot")!, forPage: 1)
+pageControl.setCurrentImage(UIImage(named: "currentAppleDot")!, forPage: 1)
+pageControl.setName("Search", forPage: 0)
+pageControl.setName("Apple", forPage: 1)
+```
 
 ## More Info
 
